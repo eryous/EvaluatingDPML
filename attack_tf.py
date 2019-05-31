@@ -214,8 +214,8 @@ def save_data():
     print('-' * 10 + 'SAVING DATA TO DISK' + '-' * 10 + '\n')
 
     #x, y, test_x, test_y = load_dataset(args.train_feat, args.train_label, args.test_feat, args.test_label) # changed train_label to test_label
-    x = pickle.load(open('dataset/'+args.train_dataset+'_features.p', 'rb'))
-    y = pickle.load(open('dataset/'+args.train_dataset+'_labels.p', 'rb'))
+    x = pickle.load(open('dataset/cnn_'+args.train_dataset+'_features.p', 'rb'))
+    y = pickle.load(open('dataset/cnn_'+args.train_dataset+'_labels.p', 'rb'))
     x, y = np.matrix(x), np.array(y)
 
     test_x, test_y = None, None
