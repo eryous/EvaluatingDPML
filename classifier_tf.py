@@ -28,14 +28,14 @@ def get_predictions(predictions):
 
 def get_model(features, labels, mode, params):
     n, n_in, n_hidden, n_out, non_linearity, model, privacy, dp, epsilon, delta, batch_size, learning_rate, l2_ratio, epochs = params
-    if model == 'cnn':
+    if model == 'cnn':#so far only implementing for CIFAR_100 dataset
         input_layer = tf.reshape(features['x'], [-1,32,32,3])
-        y = tf.keras.layers.Conv2D(n_hidden, 8, strides=2, padding='same', activation='relu').apply(input_layer)
+        y = tf.keras.layers.Conv2D(16, 3, strides=2, padding='valid', activation='relu').apply(input_layer) #16 was n_hidden, valid was same
         y = tf.keras.layers.MaxPool2D(2, 1).apply(y)
-        y = tf.keras.layers.Conv2D(n_hidden, 4, strides=2, padding='valid', activation='relu').apply(y)
+        y = tf.keras.layers.Conv2D(32, 3, strides=2, padding='valid', activation='relu').apply(y) #32 was n_hidden
         y = tf.keras.layers.MaxPool2D(2, 1).apply(y)
         y = tf.keras.layers.Flatten().apply(y)
-        y = tf.keras.layers.Dense(n_hidden, activation='relu').apply(y)
+        y = tf.keras.layers.Dense(32, activation='relu').apply(y) #32 was n_hidden
         logits = tf.keras.layers.Dense(n_out).apply(y)
     elif model == 'nn':
         #print('Using neural network...')
